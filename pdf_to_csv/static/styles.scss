@@ -1,0 +1,171 @@
+$primary-color: #3f51b5;
+$primary-hover: ($primary-color, 12%);
+$background: #eef2f7;
+$text-color: #222;
+$border-radius: 10px;
+$transition-speed: 0.25s;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: $background;
+  color: $text-color;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flash-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.flash-message {
+  background-color: #ffe6e6;
+  color: #b00020;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  background: white;
+  padding: 2.5rem 3rem;
+  border-radius: $border-radius;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 420px;
+  width: 100%;
+  animation: fadeInScale 0.5s ease forwards;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 1.8rem;
+  font-weight: 700;
+  color: $primary-color;
+  font-size: 1.9rem;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+
+  label {
+    font-weight: 600;
+    text-align: left;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+
+  .file-drop-zone {
+    border: 3px dashed $primary-color;
+    border-radius: $border-radius;
+    padding: 2.5rem;
+    cursor: pointer;
+    color: $primary-color;
+    font-weight: 600;
+    transition: background-color $transition-speed ease,
+                border-color $transition-speed ease;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 140px;
+
+    p {
+      margin: 0;
+      font-size: 1.2rem;
+
+      .file-select-label {
+        color: $primary-color;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-left: 0.3rem;
+      }
+    }
+
+    &.dragover {
+      background-color: rgba($primary-color, 0.1);
+      border-color: $primary-hover;
+      color: $primary-hover;
+    }
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border: 2px solid ($primary-color, 40%);
+    border-radius: $border-radius;
+    transition: border-color $transition-speed ease;
+
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+      box-shadow: 0 0 6px rgba($primary-color, 0.5);
+    }
+  }
+
+  .btn-primary {
+    margin-top: 1rem;
+    background-color: $primary-color;
+    border: none;
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    border-radius: $border-radius;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba($primary-color, 0.5);
+    transition: background-color $transition-speed ease,
+                transform $transition-speed ease;
+
+    &:hover {
+      background-color: $primary-hover;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba($primary-color, 0.7);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba($primary-color, 0.5);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

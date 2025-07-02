@@ -1,0 +1,186 @@
+@charset "UTF-8";
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #eef2f7;
+  color: #222;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flash-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.flash-message {
+  background-color: #ffe6e6;
+  color: #b00020;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  background: white;
+  padding: 2.5rem 3rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 420px;
+  width: 100%;
+  animation: fadeInScale 0.5s ease forwards;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 1.8rem;
+  font-weight: 700;
+  color: #3f51b5;
+  font-size: 1.9rem;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+.upload-form label {
+  font-weight: 600;
+  text-align: left;
+}
+.upload-form input[type=file] {
+  display: none;
+}
+.upload-form .file-drop-zone {
+  border: 3px dashed #3f51b5;
+  border-radius: 10px;
+  padding: 2.5rem;
+  cursor: pointer;
+  color: #3f51b5;
+  font-weight: 600;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 140px;
+}
+.upload-form .file-drop-zone p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.upload-form .file-drop-zone p .file-select-label {
+  color: #3f51b5;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 0.3rem;
+}
+.upload-form .file-drop-zone.dragover {
+  background-color: rgba(63, 81, 181, 0.1);
+  border-color: #3f51b5, 12%;
+  color: #3f51b5, 12%;
+}
+.upload-form input[type=text],
+.upload-form input[type=password] {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #3f51b5, 40%;
+  border-radius: 10px;
+  transition: border-color 0.25s ease;
+}
+.upload-form input[type=text]:focus,
+.upload-form input[type=password]:focus {
+  border-color: #3f51b5;
+  outline: none;
+  box-shadow: 0 0 6px rgba(63, 81, 181, 0.5);
+}
+.upload-form .btn-primary {
+  margin-top: 1rem;
+  background-color: #3f51b5;
+  border: none;
+  padding: 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(63, 81, 181, 0.5);
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+.upload-form .btn-primary:hover {
+  background-color: #3f51b5, 12%;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(63, 81, 181, 0.7);
+}
+.upload-form .btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(63, 81, 181, 0.5);
+}
+
+/* ===========================
+   Estilo para o Resumo
+   =========================== */
+.resumo-transacoes {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #3f51b5;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.4s ease;
+}
+.resumo-transacoes h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #3f51b5;
+}
+.resumo-transacoes p {
+  font-size: 1.1rem;
+  margin: 0.4rem 0;
+}
+.resumo-transacoes p span.valor {
+  font-weight: 700;
+  color: #222;
+  float: right;
+}
+
+/* ===========================
+   Animações
+   =========================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

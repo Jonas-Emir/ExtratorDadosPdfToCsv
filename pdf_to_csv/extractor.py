@@ -1,5 +1,6 @@
 import pdfplumber
 import re
+from PyPDF2.errors import PdfReadError
 
 def extrair_transacoes(caminho_pdf, ano, senha, processar_bloco_transacao):
     print("📄 Iniciando leitura do arquivo PDF...")
@@ -33,7 +34,6 @@ def extrair_transacoes(caminho_pdf, ano, senha, processar_bloco_transacao):
 
                     for linha_atual in linhas:
                         linha_limpa = linha_atual.strip()
-                        
                         if not linha_limpa:
                             continue
 
@@ -62,11 +62,19 @@ def extrair_transacoes(caminho_pdf, ano, senha, processar_bloco_transacao):
                         if re.match(r'^\d{2}/\d{2}', linha_limpa):
                             linha_pendente = linha_limpa
 
-    except pdfplumber.exceptions.PDFPasswordIncorrect:
-        print("\n❌ ERRO: Senha do PDF incorreta.")
-        return None
+    except PdfReadError as e:
+     if "password" in str(e).lower() or "incorrect password" in str(e).lower():
+        print("❌ ERRO: Senha incorreta.")
+        return {"erro": "senha_incorreta"}
+     else:
+        print(f"❌ ERRO ao ler o PDF: {e}")
+        return {"erro": "erro_leitura_pdf"}
     except Exception as e:
-        print(f"\n❌ Ocorreu um erro inesperado: {e}")
-        return None
+        print(f"❌ Erro inesperado: {e}")
+        return {"erro": "erro_interno"}
 
-    return transacoes
+    if not transacoes:
+        return {"erro": "nenhuma_transacao"}
+
+
+    return {"dados": transacoes}
