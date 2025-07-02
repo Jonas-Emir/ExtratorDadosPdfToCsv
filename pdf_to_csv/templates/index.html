@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Extrator de Transações</title>
+</head>
+
+<body>
+  <div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-container">
+      {% for message in messages %}
+      <div class="flash-message">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <div id="content-area">
+      <form method="POST" action="/upload" enctype="multipart/form-data" class="upload-form" id="uploadForm">
+        <h2>Importar Fatura</h2>
+        <label for="file" class="custom-file-label">Selecione o arquivo PDF:</label>
+        <input type="file" id="file" name="file" accept="application/pdf" required />
+        <div class="file-drop-zone" id="fileDropZone">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M.5 9.9l6-6V13h1V3.9l6 6 .7-.7L8 2 0 9.2l.5.7z" />
+          </svg>
+          <p>Arraste o arquivo PDF aqui ou <span class="file-select-label">clique para selecionar</span></p>
+        </div>
+        <label for="senha">Senha do PDF (se houver):</label>
+        <input type="password" id="senha" name="senha" placeholder="Senha (opcional)" autocomplete="off" />
+        <button type="submit" class="btn-primary">Processar</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('file');
+    const dropZone = document.getElementById('fileDropZone');
+    const uploadForm = document.getElementById('uploadForm');
+    const contentArea = document.getElementById('content-area');
+
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+    dropZone.addEventListener('dragleave', e => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+    });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      if (e.dataTransfer.files.length) {
+        const file = e.dataTransfer.files[0];
+        if (file.type === "application/pdf") {
+          fileInput.files = e.dataTransfer.files;
+          hideDropZone(file.name);
+        } else {
+          alert('Por favor, envie apenas arquivos PDF.');
+        }
+      }
+    });
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length) {
+        const file = fileInput.files[0];
+        if (file.type === "application/pdf") {
+          hideDropZone(file.name);
+        } else {
+          alert('Por favor, selecione apenas arquivos PDF.');
+          fileInput.value = "";
+        }
+      }
+    });
+
+    function hideDropZone(fileName) {
+      dropZone.style.display = 'none';
+      const msg = document.createElement('div');
+      msg.className = 'file-selected-message'; // <== aqui
+      msg.style.marginTop = '1rem';
+      msg.style.fontWeight = '600';
+      msg.style.color = '#3f51b5';
+      msg.textContent = `Arquivo selecionado: ${fileName}`;
+      fileInput.insertAdjacentElement('afterend', msg);
+    }
+
+    uploadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(uploadForm);
+      try {
+        const response = await fetch('/upload', {
+          method: 'POST',
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: formData
+        });
+
+        const resultHTML = await response.text();
+
+        if (response.ok) {
+          contentArea.innerHTML = resultHTML;
+        } else {
+          showFlashMessage(resultHTML);
+        }
+      } catch (error) {
+        showFlashMessage("Erro ao enviar o arquivo. Tente novamente.");
+      }
+    });
+
+    function showFlashMessage(message) {
+      let flashContainer = document.querySelector('.flash-container');
+
+      if (!flashContainer) {
+        flashContainer = document.createElement('div');
+        flashContainer.className = 'flash-container';
+        document.querySelector('.container').prepend(flashContainer);
+      }
+
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'flash-message';
+      msgDiv.textContent = message;
+      flashContainer.appendChild(msgDiv);
+
+      dropZone.style.display = 'flex';
+      fileInput.value = "";
+      const existingMsg = document.querySelector('.file-selected-message');
+      if (existingMsg) existingMsg.remove();
+
+      setTimeout(() => {
+        msgDiv.remove();
+      }, 5000);
+    }
+  </script>
+</body>
+
+</html>
