@@ -1,186 +1,193 @@
 @charset "UTF-8";
-* {
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7f6;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #eef2f7;
-  color: #222;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.flash-container {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 10px;
-  font-family: Arial, sans-serif;
-}
-
-.flash-message {
-  background-color: #ffe6e6;
-  color: #b00020;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  text-align: center;
-  font-weight: bold;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-}
-
 .container {
-  background: white;
-  padding: 2.5rem 3rem;
+  background-color: #ffffff;
+  padding: 30px 40px;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  max-width: 420px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   width: 100%;
-  animation: fadeInScale 0.5s ease forwards;
-  text-align: center;
-}
-
-h2 {
-  margin-bottom: 1.8rem;
-  font-weight: 700;
-  color: #3f51b5;
-  font-size: 1.9rem;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
 }
 
 .upload-form {
   display: flex;
   flex-direction: column;
-  gap: 1.3rem;
+  gap: 20px;
+  width: 100%;
 }
-.upload-form label {
-  font-weight: 600;
-  text-align: left;
+.upload-form h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+}
+.upload-form .form-group {
+  margin-bottom: 15px;
+}
+.upload-form .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: bold;
+}
+.upload-form .form-group.file-type-selection .radio-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 5px;
+}
+.upload-form .form-group.file-type-selection .radio-group label {
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.upload-form .form-group.file-type-selection .radio-group label input[type=radio] {
+  margin-right: 8px;
+  transform: scale(1.1);
+}
+.upload-form select,
+.upload-form input[type=password] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 .upload-form input[type=file] {
   display: none;
 }
 .upload-form .file-drop-zone {
-  border: 3px dashed #3f51b5;
-  border-radius: 10px;
-  padding: 2.5rem;
+  border: 2px dashed #a0a0a0;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
   cursor: pointer;
-  color: #3f51b5;
-  font-weight: 600;
-  transition: background-color 0.25s ease, border-color 0.25s ease;
-  user-select: none;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-height: 140px;
+  justify-content: center;
+  gap: 10px;
+  min-height: 120px;
+}
+.upload-form .file-drop-zone:hover, .upload-form .file-drop-zone.dragover {
+  background-color: #e9e9e9;
+  border-color: #3f51b5;
+}
+.upload-form .file-drop-zone svg {
+  color: #3f51b5;
 }
 .upload-form .file-drop-zone p {
   margin: 0;
-  font-size: 1.2rem;
+  color: #666;
+  font-size: 0.95rem;
 }
-.upload-form .file-drop-zone p .file-select-label {
+.upload-form .file-drop-zone .file-select-label {
   color: #3f51b5;
+  font-weight: bold;
   text-decoration: underline;
-  cursor: pointer;
-  margin-left: 0.3rem;
 }
-.upload-form .file-drop-zone.dragover {
-  background-color: rgba(63, 81, 181, 0.1);
-  border-color: #3f51b5, 12%;
-  color: #3f51b5, 12%;
-}
-.upload-form input[type=text],
-.upload-form input[type=password] {
-  padding: 0.8rem 1rem;
-  font-size: 1rem;
-  border: 2px solid #3f51b5, 40%;
-  border-radius: 10px;
-  transition: border-color 0.25s ease;
-}
-.upload-form input[type=text]:focus,
-.upload-form input[type=password]:focus {
-  border-color: #3f51b5;
-  outline: none;
-  box-shadow: 0 0 6px rgba(63, 81, 181, 0.5);
+.upload-form .file-selected-message {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #3f51b5;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #3f51b5, 30%;
+  border-radius: 5px;
+  background-color: #3f51b5, 40%;
 }
 .upload-form .btn-primary {
-  margin-top: 1rem;
   background-color: #3f51b5;
-  border: none;
-  padding: 1rem 0;
-  font-size: 1.1rem;
-  font-weight: 700;
   color: white;
-  border-radius: 10px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
   cursor: pointer;
-  box-shadow: 0 6px 14px rgba(63, 81, 181, 0.5);
-  transition: background-color 0.25s ease, transform 0.25s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 20px;
 }
 .upload-form .btn-primary:hover {
-  background-color: #3f51b5, 12%;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(63, 81, 181, 0.7);
-}
-.upload-form .btn-primary:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(63, 81, 181, 0.5);
+  background-color: #303f9f;
+  transform: translateY(-2px);
 }
 
-/* ===========================
-   Estilo para o Resumo
-   =========================== */
-.resumo-transacoes {
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-left: 5px solid #3f51b5;
+.flash-container {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.flash-message {
+  padding: 15px;
   border-radius: 8px;
-  padding: 1.5rem;
-  margin-top: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  animation: fadeIn 0.4s ease;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
 }
-.resumo-transacoes h2 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color: #3f51b5;
+.flash-message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
 }
-.resumo-transacoes p {
-  font-size: 1.1rem;
-  margin: 0.4rem 0;
+.flash-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }
-.resumo-transacoes p span.valor {
-  font-weight: 700;
-  color: #222;
-  float: right;
+.flash-message.info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
 }
 
-/* ===========================
-   Animações
-   =========================== */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+#pdfRelatedFields {
+  transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, margin-bottom 0.5s ease-in-out;
+  overflow: hidden;
+  /* Garante que o conteúdo não vaze durante a transição */
 }
-@keyframes fadeInScale {
-  0% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+
+.pdf-fields-hidden {
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 0;
+}
+.pdf-fields-hidden .form-group {
+  margin-bottom: 0;
+  /* Remove margin-bottom de dentro dos grupos quando ocultos */
+}
+
+.pdf-fields-visible {
+  max-height: 200px; /* Ajuste se o conteúdo for maior, mas evite uma altura fixa muito grande */
+  opacity: 1;
+  margin-bottom: 15px;
+  padding-top: initial;
+  padding-bottom: initial;
+  border: initial;
+}
+.pdf-fields-visible .form-group {
+  margin-bottom: 15px;
+  /* Restaura margin-bottom normal */
 }
 
 /*# sourceMappingURL=styles.css.map */

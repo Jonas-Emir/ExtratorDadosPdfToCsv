@@ -2,3 +2,6 @@ pdfplumber
 pandas
 flask
 werkzeug
+gunicorn
+PyPDF2
+requests
